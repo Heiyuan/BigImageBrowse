@@ -1,0 +1,46 @@
+//
+//  BrowseImageViewController.m
+//  BigImageBrowse
+//
+//  Created by Dayuan on 2017/4/1.
+//  Copyright © 2017年 Dayuan. All rights reserved.
+//
+
+#import "BrowseImageViewController.h"
+#import "BrowseImageScrollView.h"
+
+@interface BrowseImageViewController ()
+@property (nonatomic,strong) BrowseImageScrollView *ImageView;
+@end
+
+@implementation BrowseImageViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.view.backgroundColor = [UIColor redColor];
+    _ImageView = [[BrowseImageScrollView alloc] init];
+    [self.view addSubview:_ImageView];
+}
+- (void)setImage:(UIImage *)image{
+    _image = image;
+    _ImageView.frame = self.view.frame;
+    _ImageView.image = image;
+    _ImageView.center = self.view.center;
+}
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+@end
