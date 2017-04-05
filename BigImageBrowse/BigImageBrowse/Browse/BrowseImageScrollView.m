@@ -83,7 +83,6 @@
 }
 
 - (void)clickImageView:(UITapGestureRecognizer *)tap{
-    NSLog(@"%ld",tap.numberOfTouches);
     if (self.zoomScale < 1) {
         [self setZoomScale:1 animated:YES];
     }else if (self.zoomScale == 1){
