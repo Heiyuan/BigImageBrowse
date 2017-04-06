@@ -342,7 +342,6 @@ typedef void(^PositionReduction)();
 //MARK:scrollViewDelegate
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     NSInteger index = scrollView.contentOffset.x / BROScreenW;
-    NSLog(@"%ld",index);
     self.nowModel.smallImageView.hidden = NO;
     self.nowModel.smallImageView.userInteractionEnabled = YES;
     self.nowModel = [_imageModelArr objectAtIndex:index];

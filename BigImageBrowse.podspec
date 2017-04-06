@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "BigImageBrowse"
-  s.version      = "0.0.1"
+  s.version      = "0.0.2"
   s.summary      = "BigImageBrowse image."
 
   # This description is used to generate tags and improve search results.
@@ -53,10 +53,10 @@ Pod::Spec.new do |s|
   #  profile URL.
   #
 
-  s.author             = { "刘志远" => "heidayuan@126.com" }
-  # Or just: s.author    = "刘志远"
-  # s.authors            = { "刘志远" => "heidayuan@126.com" }
-  # s.social_media_url   = "http://twitter.com/刘志远"
+  s.author             = { "Dayuan" => "heidayuan@126.com" }
+  # Or just: s.author    = "Dayuan"
+  # s.authors            = { "Dayuan" => "heidayuan@126.com" }
+  # s.social_media_url   = "http://twitter.com/Dayuan"
 
   # ――― Platform Specifics ――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
@@ -80,7 +80,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/Heiyuan/BigImageBrowse.git", :tag => "0.0.1" }
+  s.source       = { :git => "https://github.com/Heiyuan/BigImageBrowse.git", :tag => "0.0.2" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
