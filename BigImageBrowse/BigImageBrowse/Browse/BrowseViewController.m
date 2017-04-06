@@ -19,13 +19,9 @@ typedef void(^PositionReduction)();
 @property (nonatomic,strong) UIView *snapshotView;
 @property (nonatomic,strong) UIView *shadowView;
 @property (nonatomic,strong) BrowScroller *mainScroller;
-/**< 辅助动画 */
 @property (nonatomic,strong) UIImageView *mainImageView;
-/**< 上个视图的image */
 @property (nonatomic,strong) UIImageView *upVcImageView;
-/**< 返回的图片位置 */
 @property (nonatomic,assign) CGRect ReturnFrame;
-
 @property (nonatomic,weak) BrowseImageModel *nowModel;
 @property (nonatomic,copy) PositionReduction commectBlock;
 @property (nonatomic,strong) UITapGestureRecognizer *tap;
@@ -33,10 +29,12 @@ typedef void(^PositionReduction)();
 
 @implementation BrowseViewController{
     NSInteger nowPicIndex;
+    BOOL StatusBarHidden;
+    UIStatusBarStyle statusBatStyle;
 }
 
 - (void)dealloc{
-    NSLog(@"内存没有泄露,图片浏览器释放了");
+    NSLog(@"-dealloc");
 }
 
 - (instancetype)initWithimageModelArr:(NSArray<BrowseImageModel *> *)imageModelArr{
@@ -80,7 +78,7 @@ typedef void(^PositionReduction)();
     [self.view addSubview:self.mainImageView];
     
 }
-//MARK:scrollerView 增加视图
+//MARK:scrollerView
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
 {
     NSInteger tap =  999 + (scrollView.contentOffset.x / BROScreenW);
@@ -88,7 +86,11 @@ typedef void(^PositionReduction)();
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-  
+    statusBatStyle = [UIApplication sharedApplication].statusBarStyle;
+    StatusBarHidden = [UIApplication sharedApplication].statusBarHidden;
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:animated];
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationSlide];
+
     [UIView animateWithDuration:.1 animations:^{
         _shadowView.alpha = 1;
     }];
@@ -118,6 +120,8 @@ typedef void(^PositionReduction)();
 }
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
+    [[UIApplication sharedApplication] setStatusBarStyle:statusBatStyle animated:animated];
+    [[UIApplication sharedApplication] setStatusBarHidden:StatusBarHidden withAnimation:UIStatusBarAnimationNone];
     _upVcImageView.hidden = NO;
     _nowModel.smallImageView.userInteractionEnabled = YES;
 
@@ -337,8 +341,6 @@ typedef void(^PositionReduction)();
 
     return imageSize;
 }
-
-
 //MARK:scrollViewDelegate
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     NSInteger index = scrollView.contentOffset.x / BROScreenW;

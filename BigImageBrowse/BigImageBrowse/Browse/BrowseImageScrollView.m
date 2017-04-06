@@ -35,10 +35,7 @@
         [self addSubview:_imageView];
         self.delegate = self;
         
-        // 设置最大缩放比例
-        self.maximumZoomScale = 10.0;
-        // 设置最小缩放比例
-        self.minimumZoomScale = 1;
+
     }
     return self;
 }
@@ -77,15 +74,31 @@
         _imageView.frame = CGRectMake(0, (BROScreenH  - ksize.height) /2.f, ksize.width, ksize.height);
     }
     self.contentSize = ksize;
-    
-
+    /*
+     // 设置最大缩放比例
+     self.maximumZoomScale = 10.0;
+     // 设置最小缩放比例
+     self.minimumZoomScale = 1;
+     */
+    if (image.size.width  > BROScreenW) {
+        self.maximumZoomScale = image.size.width/BROScreenW;
+        self.minimumZoomScale = BROScreenW/image.size.width;
+    }else{
+        self.maximumZoomScale = 2.0;
+        // 设置最小缩放比例
+        self.minimumZoomScale = .5;
+    }
+    if (image.size.height  > BROScreenH){
+        self.maximumZoomScale = image.size.height/BROScreenH;
+        self.minimumZoomScale = BROScreenH/image.size.height;
+    }
 }
 
 - (void)clickImageView:(UITapGestureRecognizer *)tap{
     if (self.zoomScale < 1) {
         [self setZoomScale:1 animated:YES];
     }else if (self.zoomScale == 1){
-        [self setZoomScale:5 animated:YES];
+        [self setZoomScale:self.maximumZoomScale animated:YES];
     }else{
         [self setZoomScale:1 animated:YES];
     }
