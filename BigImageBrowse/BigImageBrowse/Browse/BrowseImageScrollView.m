@@ -115,6 +115,8 @@
         CGFloat width = imageSize.height / self.bounds.size.height  * imageSize.width;
         return CGSizeMake(width,self.bounds.size.height);
     }
+    CGFloat height = self.bounds.size.width / imageSize.width  * imageSize.height;
+    return CGSizeMake(BROScreenW,height);
     
     return imageSize;
 }

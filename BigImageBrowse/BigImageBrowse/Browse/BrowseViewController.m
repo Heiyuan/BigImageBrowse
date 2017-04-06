@@ -29,7 +29,6 @@ typedef void(^PositionReduction)();
 
 @implementation BrowseViewController{
     NSInteger nowPicIndex;
-    BOOL StatusBarHidden;
     UIStatusBarStyle statusBatStyle;
 }
 
@@ -52,7 +51,7 @@ typedef void(^PositionReduction)();
     [super viewDidLoad];
     self.hidesBottomBarWhenPushed = YES;
     [self.view addSubview:_snapshotView];
-
+    
     _shadowView = [[UIView alloc] initWithFrame:self.view.bounds];
     [self.view addSubview:_shadowView];
     _shadowView.backgroundColor = [UIColor blackColor];
@@ -87,10 +86,8 @@ typedef void(^PositionReduction)();
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     statusBatStyle = [UIApplication sharedApplication].statusBarStyle;
-    StatusBarHidden = [UIApplication sharedApplication].statusBarHidden;
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:animated];
-    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationSlide];
-
+    
     [UIView animateWithDuration:.1 animations:^{
         _shadowView.alpha = 1;
     }];
@@ -121,10 +118,9 @@ typedef void(^PositionReduction)();
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [[UIApplication sharedApplication] setStatusBarStyle:statusBatStyle animated:animated];
-    [[UIApplication sharedApplication] setStatusBarHidden:StatusBarHidden withAnimation:UIStatusBarAnimationNone];
     _upVcImageView.hidden = NO;
     _nowModel.smallImageView.userInteractionEnabled = YES;
-
+    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -174,19 +170,19 @@ typedef void(^PositionReduction)();
         _upVcImageView = [[UIImageView alloc] initWithFrame:_nowModel.smallRect];
         _upVcImageView.image = _nowModel.image;
         [[[ObtainViewController getCurrentVC] view] addSubview:_upVcImageView];
-         [UIView animateWithDuration:.2 animations:^{
-             
-             [_upVcImageView setbroY:BROTopBarY];
-         } completion:^(BOOL finished) {
-             self.mainImageView.frame = _upVcImageView.frame;
-             _ReturnFrame = _upVcImageView.frame;
-             [self show];
-         }];
+        [UIView animateWithDuration:.2 animations:^{
+            
+            [_upVcImageView setbroY:BROTopBarY];
+        } completion:^(BOOL finished) {
+            self.mainImageView.frame = _upVcImageView.frame;
+            _ReturnFrame = _upVcImageView.frame;
+            [self show];
+        }];
         
-
+        
         return;
     }
-   
+    
     
     if (CGRectGetMinY(_nowModel.smallRect) < 0) {
         _commectBlock = ^{
@@ -216,12 +212,12 @@ typedef void(^PositionReduction)();
         
         return;
     }
-
+    
     
     
     
     if (CGRectGetMaxY(_nowModel.smallRect) > BROTabBarY && [ObtainViewController tabbarControllerShow]) {
-
+        
         _commectBlock = ^{
             __strong __typeof(weakSelf)strongSelf = weakSelf;
             [UIView animateWithDuration:.2 animations:^{
@@ -246,7 +242,7 @@ typedef void(^PositionReduction)();
         }];
         
         return;
-
+        
         
     }
     
@@ -281,13 +277,13 @@ typedef void(^PositionReduction)();
         
         
     }
-
+    
     
     _commectBlock = ^{
         weakSelf.nowModel.smallImageView.hidden = NO;
     };
     [self show];
-
+    
 }
 //MARK:show & hidd
 
@@ -303,15 +299,15 @@ typedef void(^PositionReduction)();
     }
     [rootViewController presentViewController:self animated:NO completion:^{
         _nowModel.smallImageView.hidden = YES;
-
+        
     }];
 }
 
 - (void)hiddself{
-
+    
     [UIView animateWithDuration:.2 delay:.2 options:UIViewAnimationOptionLayoutSubviews animations:^{
         _shadowView.alpha = 0;
-
+        
         
     } completion:nil];
     __weak __typeof(self)weakSelf = self;
@@ -319,7 +315,7 @@ typedef void(^PositionReduction)();
     _mainScroller.hidden = YES;
     [UIView animateWithDuration:.4 animations:^{
         _mainImageView.frame = _ReturnFrame;
-
+        
     } completion:^(BOOL finished) {
         [weakSelf dismissViewControllerAnimated:NO completion:_commectBlock?_commectBlock:nil];
     }];
@@ -338,7 +334,8 @@ typedef void(^PositionReduction)();
         CGFloat width = imageSize.height / self.view.bounds.size.height  * imageSize.width;
         return CGSizeMake(width,self.view.bounds.size.height);
     }
-
+    CGFloat height = self.view.bounds.size.width / imageSize.width  * imageSize.height;
+    return CGSizeMake(BROScreenW,height);
     return imageSize;
 }
 //MARK:scrollViewDelegate
@@ -361,7 +358,7 @@ typedef void(^PositionReduction)();
         __strong __typeof(weakSelf)strongSelf = weakSelf;
         strongSelf.nowModel.smallImageView.hidden = NO;
         [strongSelf.upVcImageView removeFromSuperview];
- 
+        
     };
 }
 

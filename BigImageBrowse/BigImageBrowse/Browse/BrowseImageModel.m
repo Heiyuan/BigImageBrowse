@@ -25,15 +25,7 @@
         _source = SourceSmallImageView;
         _image = imageView.image;
         
-        UIViewController *rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
-        _smallRect = [rootViewController.view convertRect:imageView.frame toView:imageView.window];
-        
-//        if (_smallRect.origin.x < 0) {
-        
-//        }else if (){
-            
-//        }
-        
+        _smallRect = [imageView.superview convertRect:imageView.frame toView:imageView.window];
         
     }
     return self;

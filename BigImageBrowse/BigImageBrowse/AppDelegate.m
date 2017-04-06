@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "ViewController.h"
 #import "SecondViewController.h"
+#import "ThirdViewController.h"
 
 @interface AppDelegate ()
 
@@ -24,6 +25,10 @@
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
     UINavigationController *navc = [[UINavigationController alloc] initWithRootViewController:[ViewController new]];
     UINavigationController *navc1 = [[UINavigationController alloc] initWithRootViewController:[SecondViewController new]];
+    ThirdViewController *vc1 = [[ThirdViewController alloc] init];
+    
+    vc1.tabBarItem.image = [[UIImage imageNamed:@"ntab1"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    vc1.tabBarItem.selectedImage = [[UIImage imageNamed:@"tab1"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
     navc.tabBarItem.image = [[UIImage imageNamed:@"ntab1"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     navc1.tabBarItem.image = [[UIImage imageNamed:@"ntab2"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
@@ -32,7 +37,7 @@
     navc1.tabBarItem.selectedImage = [[UIImage imageNamed:@"tab2"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
 
     UITabBarController *tabView = [[UITabBarController alloc] init];
-    tabView.viewControllers = @[navc,navc1];
+    tabView.viewControllers = @[navc,navc1,vc1];
     self.window.rootViewController = tabView;
     
     return YES;
