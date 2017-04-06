@@ -11,4 +11,8 @@
 @interface BrowseImageScrollView : UIScrollView
 @property (nonatomic,weak)  UITapGestureRecognizer *hiddtap;
 @property (nonatomic,strong) UIImage *image;
+
+
+@property (nonatomic,strong) UIImageView *imageView;
+
 @end

@@ -65,12 +65,14 @@ typedef void(^PositionReduction)();
     _mainScroller.backgroundColor = [UIColor clearColor];
     _mainScroller.contentSize = CGSizeMake(BROScreenW * _imageModelArr.count, 0);
     _mainScroller.pagingEnabled = YES;
+    _mainScroller.delegate = self;
     {
         for (NSInteger i = 0 ; i < _imageModelArr.count; i++) {
             BrowseImageScrollView *imageViewScroller = [[BrowseImageScrollView alloc] init];
             imageViewScroller.frame = CGRectMake(i * BROScreenW, 0, BROScreenW, BROScreenH);
             imageViewScroller.image = [_imageModelArr[i] image];
             imageViewScroller.hiddtap = _tap;
+            imageViewScroller.tag = 1000 + i;
             [_mainScroller addSubview:imageViewScroller];
         }
     }
@@ -152,7 +154,7 @@ typedef void(^PositionReduction)();
 - (void)showBrowseViewController{
     _nowModel.smallImageView.userInteractionEnabled = NO;
     __weak __typeof(self)weakSelf = self;
-    if (CGRectGetMinY(_nowModel.smallRect) < BROTopBarY && [self NavigationControllerShow]) {
+    if (CGRectGetMinY(_nowModel.smallRect) < BROTopBarY && [ObtainViewController NavigationControllerShow]) {
         _commectBlock = ^{
             __strong __typeof(weakSelf)strongSelf = weakSelf;
             
@@ -167,7 +169,7 @@ typedef void(^PositionReduction)();
         };
         _upVcImageView = [[UIImageView alloc] initWithFrame:_nowModel.smallRect];
         _upVcImageView.image = _nowModel.image;
-        [[[self getCurrentVC] view] addSubview:_upVcImageView];
+        [[[ObtainViewController getCurrentVC] view] addSubview:_upVcImageView];
          [UIView animateWithDuration:.2 animations:^{
              
              [_upVcImageView setbroY:BROTopBarY];
@@ -197,7 +199,7 @@ typedef void(^PositionReduction)();
         };
         _upVcImageView = [[UIImageView alloc] initWithFrame:_nowModel.smallRect];
         _upVcImageView.image = _nowModel.image;
-        [[[self getCurrentVC] view] addSubview:_upVcImageView];
+        [[[ObtainViewController getCurrentVC] view] addSubview:_upVcImageView];
         [UIView animateWithDuration:.2 animations:^{
             
             [_upVcImageView setbroY:0];
@@ -214,7 +216,7 @@ typedef void(^PositionReduction)();
     
     
     
-    if (CGRectGetMaxY(_nowModel.smallRect) > BROTabBarY && [self tabbarControllerShow]) {
+    if (CGRectGetMaxY(_nowModel.smallRect) > BROTabBarY && [ObtainViewController tabbarControllerShow]) {
 
         _commectBlock = ^{
             __strong __typeof(weakSelf)strongSelf = weakSelf;
@@ -229,7 +231,7 @@ typedef void(^PositionReduction)();
         };
         _upVcImageView = [[UIImageView alloc] initWithFrame:_nowModel.smallRect];
         _upVcImageView.image = _nowModel.image;
-        [[[self getCurrentVC] view] addSubview:_upVcImageView];
+        [[[ObtainViewController getCurrentVC] view] addSubview:_upVcImageView];
         [UIView animateWithDuration:.2 animations:^{
             
             [_upVcImageView setbroY:(BROTabBarY - _upVcImageView.broHeight)];
@@ -261,7 +263,7 @@ typedef void(^PositionReduction)();
         };
         _upVcImageView = [[UIImageView alloc] initWithFrame:_nowModel.smallRect];
         _upVcImageView.image = _nowModel.image;
-        [[[self getCurrentVC] view] addSubview:_upVcImageView];
+        [[[ObtainViewController getCurrentVC] view] addSubview:_upVcImageView];
         [UIView animateWithDuration:.2 animations:^{
             
             [_upVcImageView setbroY:(BROScreenH - _upVcImageView.broHeight)];
@@ -337,58 +339,30 @@ typedef void(^PositionReduction)();
 }
 
 
-//获取当前屏幕显示的viewcontroller
-- (UIViewController *)getCurrentVC
-{
-    UIViewController *rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
+//MARK:scrollViewDelegate
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    NSInteger index = scrollView.contentOffset.x / BROScreenW;
+    NSLog(@"%ld",index);
+    self.nowModel.smallImageView.hidden = NO;
+    self.nowModel.smallImageView.userInteractionEnabled = YES;
+    self.nowModel = [_imageModelArr objectAtIndex:index];
+    self.nowModel.smallImageView.hidden = YES;
+    _ReturnFrame = _nowModel.smallRect;
+    BrowseImageScrollView *imageScroller = [scrollView viewWithTag:1000 + index];
+    _mainImageView.frame = imageScroller.imageView.frame;
+    _upVcImageView.image = self.nowModel.image;
+    __weak __typeof(self)weakSelf = self;
     
-    UIViewController *currentVC = [self getCurrentVCFrom:rootViewController];
     
-    return currentVC;
+    self.upVcImageView.hidden = YES;
+    _commectBlock = ^{
+        //此处欠处理/
+        __strong __typeof(weakSelf)strongSelf = weakSelf;
+        strongSelf.nowModel.smallImageView.hidden = NO;
+        [strongSelf.upVcImageView removeFromSuperview];
+ 
+    };
 }
 
-- (UIViewController *)getCurrentVCFrom:(UIViewController *)rootVC
-{
-    UIViewController *currentVC;
-    
-    if ([rootVC presentedViewController]) {
-        // 视图是被presented出来的
-        
-        rootVC = [rootVC presentedViewController];
-    }
-    
-    if ([rootVC isKindOfClass:[UITabBarController class]]) {
-        // 根视图为UITabBarController
-        
-        currentVC = [self getCurrentVCFrom:[(UITabBarController *)rootVC selectedViewController]];
-        
-    } else if ([rootVC isKindOfClass:[UINavigationController class]]){
-        // 根视图为UINavigationController
-        
-        currentVC = [self getCurrentVCFrom:[(UINavigationController *)rootVC visibleViewController]];
-        
-    } else {
-        // 根视图为非导航类
-        
-        currentVC = rootVC;
-    }
-    
-    return currentVC;
-}
-//判断当先导航控制器是否显示
-- (BOOL)NavigationControllerShow{
-    UIViewController *viewControll = [self getCurrentVC];
-    if (!viewControll.navigationController) {
-        return NO;
-    }
-    if (viewControll.navigationController.navigationBarHidden) {
-        return NO;
-    }
-    return YES;
-}
-//判断当前tab是否显示
-- (BOOL)tabbarControllerShow{
-    UIViewController *viewControll = [self getCurrentVC];
-    return !viewControll.hidesBottomBarWhenPushed;
-}
+
 @end

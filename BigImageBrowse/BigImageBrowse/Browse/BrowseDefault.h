@@ -9,6 +9,7 @@
 #ifndef BrowseDefault_h
 #define BrowseDefault_h
 #import "UIView+BrowseLayout.h"
+#import "ObtainViewController.h"
 
 #define BROScreenW ([[UIScreen mainScreen] bounds].size.width)
 #define BROScreenH ([[UIScreen mainScreen] bounds].size.height)

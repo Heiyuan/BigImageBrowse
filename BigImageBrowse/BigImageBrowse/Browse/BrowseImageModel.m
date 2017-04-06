@@ -8,7 +8,7 @@
 
 
 #import "BrowseImageModel.h"
-
+#import "BrowseDefault.h"
 
 
 @interface BrowseImageModel ()
@@ -27,7 +27,18 @@
         
         UIViewController *rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
         _smallRect = [rootViewController.view convertRect:imageView.frame toView:imageView.window];
+        
+//        if (_smallRect.origin.x < 0) {
+        
+//        }else if (){
+            
+//        }
+        
+        
     }
     return self;
 }
+
+
+
 @end

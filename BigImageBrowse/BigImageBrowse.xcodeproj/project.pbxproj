@@ -28,6 +28,7 @@
 		732D6AB71E8E47E2006A92AE /* text1.png in Resources */ = {isa = PBXBuildFile; fileRef = 732D6AB61E8E47E2006A92AE /* text1.png */; };
 		732D6ABB1E8E4AA8006A92AE /* BrowseImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 732D6ABA1E8E4AA8006A92AE /* BrowseImageModel.m */; };
 		736E3ABC1E94C7D4003E943D /* text4.png in Resources */ = {isa = PBXBuildFile; fileRef = 736E3ABB1E94C7D4003E943D /* text4.png */; };
+		7389E5951E95D709007DA445 /* ObtainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7389E5941E95D709007DA445 /* ObtainViewController.m */; };
 		73DA6A081E94B79A00A5D540 /* text2.png in Resources */ = {isa = PBXBuildFile; fileRef = 73DA6A061E94B79A00A5D540 /* text2.png */; };
 		73DA6A091E94B79A00A5D540 /* text3.png in Resources */ = {isa = PBXBuildFile; fileRef = 73DA6A071E94B79A00A5D540 /* text3.png */; };
 /* End PBXBuildFile section */
@@ -88,6 +89,8 @@
 		732D6AB91E8E4AA8006A92AE /* BrowseImageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowseImageModel.h; sourceTree = "<group>"; };
 		732D6ABA1E8E4AA8006A92AE /* BrowseImageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowseImageModel.m; sourceTree = "<group>"; };
 		736E3ABB1E94C7D4003E943D /* text4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = text4.png; sourceTree = "<group>"; };
+		7389E5931E95D709007DA445 /* ObtainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObtainViewController.h; sourceTree = "<group>"; };
+		7389E5941E95D709007DA445 /* ObtainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObtainViewController.m; sourceTree = "<group>"; };
 		73DA6A061E94B79A00A5D540 /* text2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = text2.png; sourceTree = "<group>"; };
 		73DA6A071E94B79A00A5D540 /* text3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = text3.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -201,6 +204,8 @@
 				730791E01E8FA952001892C9 /* BrowseImageScrollView.m */,
 				732D6AB91E8E4AA8006A92AE /* BrowseImageModel.h */,
 				732D6ABA1E8E4AA8006A92AE /* BrowseImageModel.m */,
+				7389E5931E95D709007DA445 /* ObtainViewController.h */,
+				7389E5941E95D709007DA445 /* ObtainViewController.m */,
 				731E7F121E8F4E6E0051D0BD /* UIView+BrowseLayout.h */,
 				731E7F131E8F4E6E0051D0BD /* UIView+BrowseLayout.m */,
 				730791D61E8F96E4001892C9 /* BrowScroller.h */,
@@ -361,6 +366,7 @@
 				732D6A791E8E262F006A92AE /* AppDelegate.m in Sources */,
 				731E7F141E8F4E6E0051D0BD /* UIView+BrowseLayout.m in Sources */,
 				732D6AAA1E8E2782006A92AE /* BrowseViewController.m in Sources */,
+				7389E5951E95D709007DA445 /* ObtainViewController.m in Sources */,
 				732D6A761E8E262F006A92AE /* main.m in Sources */,
 				732D6ABB1E8E4AA8006A92AE /* BrowseImageModel.m in Sources */,
 				730791DB1E8FA723001892C9 /* BrowseImageViewController.m in Sources */,

@@ -10,6 +10,7 @@
 #define Browse_h
 #import "BrowseViewController.h"
 #import "BrowseImageModel.h"
+#import "ObtainViewController.h"
 
 
 

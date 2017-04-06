@@ -10,7 +10,6 @@
 #import "BrowseDefault.h"
 
 @interface BrowseImageScrollView ()<UIScrollViewDelegate>
-@property (nonatomic,strong) UIImageView *imageView;
 @property (nonatomic,strong) UITapGestureRecognizer *imageTap;
 @end
 
