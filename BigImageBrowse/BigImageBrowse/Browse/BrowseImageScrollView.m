@@ -87,11 +87,13 @@
         self.maximumZoomScale = 2.0;
         // 设置最小缩放比例
         self.minimumZoomScale = .5;
+        _imageView.center = self.center;
     }
     if (image.size.height  > BROScreenH){
         self.maximumZoomScale = image.size.height/BROScreenH;
         self.minimumZoomScale = BROScreenH/image.size.height;
     }
+//
 }
 
 - (void)clickImageView:(UITapGestureRecognizer *)tap{

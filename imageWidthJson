@@ -1,0 +1,5 @@
+var img = document.getElementsByTagName("img");
+    for(var i = 0 ; i < img.length ; i++){
+        var src = img[i].getAttribute("src");
+        img[i].setAttribute("src",src+"?x-oss-process=image/resize,w_375");
+    }
